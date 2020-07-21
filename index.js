@@ -1,4 +1,5 @@
 let runState = false
+let speed = 0.5
 
 const POINTS = 10
 const RADIUS = 300
@@ -86,8 +87,8 @@ const selectPoints = (imgWidth, imgHeight) => {
 
 const nextPoint = (current, destination) => {
   if (current === destination) return 0
-  if (current > destination) return -1
-  return 1
+  if (current > destination) return -1 * speed
+  return speed
 }
 
 let pointCounter = 1
@@ -112,7 +113,6 @@ const kaleidoscopeGo = img => {
     const distanceY = Math.abs(y - destinationPoint.y)
 
     if (distanceX === 0 && distanceY === 0) {
-      console.log('on to the next point')
       pointCounter = (pointCounter + 1) % POINTS
       destinationPoint = points[pointCounter]
     } else if (distanceX === distanceY) {
@@ -126,17 +126,14 @@ const kaleidoscopeGo = img => {
 
     if (runState) {
       window.requestAnimationFrame(loop)
-    } else {
-      console.log('stopping')
     }
   }
-  console.log('starting')
+
   runState = true;
   window.requestAnimationFrame(loop)
 }
 
 const selectImage = (e) => {
-  console.log('about to stop')
   runState = false;
 
   window.requestAnimationFrame(() => {
@@ -151,5 +148,8 @@ const options = document.getElementsByClassName('optionImg')
 for (let i = 0; i < options.length; i++) {
   options[i].onclick = selectImage
 }
+
+document.getElementById('slowSpeed').onclick = () => speed = 0.5
+document.getElementById('fastSpeed').onclick = () => speed = 1
 
 options[0].click()
