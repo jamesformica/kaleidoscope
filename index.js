@@ -98,8 +98,6 @@ var img = document.createElement('img');
 img.onload = function () {
   const points = selectPoints(img.width, img.height)
 
-  debugger
-
   x = points[0].x
   y = points[0].y
 
