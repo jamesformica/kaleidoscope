@@ -117,15 +117,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"img/guitars.jpg":[function(require,module,exports) {
-module.exports = "/guitars.086455d4.jpg";
-},{}],"index.js":[function(require,module,exports) {
-"use strict";
-
-var _guitars = _interopRequireDefault(require("./img/guitars.jpg"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+})({"index.js":[function(require,module,exports) {
+var runState = false;
 var POINTS = 10;
 var RADIUS = 300;
 var SLICE = 30;
@@ -151,7 +144,7 @@ var clearCanvases = function clearCanvases() {
   clearCanvas(kCanvas, kCtx);
 };
 
-var drawWedge = function drawWedge() {
+var drawWedge = function drawWedge(x, y, img) {
   var degree = 345;
   var d1 = degree - 0.5;
   var d2 = degree + SLICE + 0.2; // remove white seams
@@ -218,9 +211,8 @@ var nextPoint = function nextPoint(current, destination) {
 var pointCounter = 1;
 var x = -1;
 var y = -1;
-var img = document.createElement('img');
 
-img.onload = function () {
+var kaleidoscopeGo = function kaleidoscopeGo(img) {
   var points = selectPoints(img.width, img.height);
   x = points[0].x;
   y = points[0].y;
@@ -228,7 +220,7 @@ img.onload = function () {
 
   var loop = function loop() {
     clearCanvases();
-    drawWedge();
+    drawWedge(x, y, img);
     drawInverseWedge();
     drawWheel();
     var distanceX = Math.abs(x - destinationPoint.x);
@@ -247,14 +239,40 @@ img.onload = function () {
       y += nextPoint(y, destinationPoint.y);
     }
 
-    window.requestAnimationFrame(loop);
+    if (runState) {
+      window.requestAnimationFrame(loop);
+    } else {
+      console.log('stopping');
+    }
   };
 
+  console.log('starting');
+  runState = true;
   window.requestAnimationFrame(loop);
 };
 
-img.src = _guitars.default;
-},{"./img/guitars.jpg":"img/guitars.jpg"}],"../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var selectImage = function selectImage(e) {
+  console.log('about to stop');
+  runState = false;
+  window.requestAnimationFrame(function () {
+    var img = new Image();
+
+    img.onload = function () {
+      return kaleidoscopeGo(img);
+    };
+
+    img.src = e.target.src;
+  });
+};
+
+var options = document.getElementsByClassName('optionImg');
+
+for (var i = 0; i < options.length; i++) {
+  options[i].onclick = selectImage;
+}
+
+options[0].click();
+},{}],"../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -282,7 +300,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50287" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50666" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
