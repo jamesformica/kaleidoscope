@@ -119,6 +119,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"index.js":[function(require,module,exports) {
 var runState = false;
+var speed = 0.5;
 var POINTS = 10;
 var RADIUS = 300;
 var SLICE = 30;
@@ -204,8 +205,8 @@ var selectPoints = function selectPoints(imgWidth, imgHeight) {
 
 var nextPoint = function nextPoint(current, destination) {
   if (current === destination) return 0;
-  if (current > destination) return -1;
-  return 1;
+  if (current > destination) return -1 * speed;
+  return speed;
 };
 
 var pointCounter = 1;
@@ -241,18 +242,14 @@ var kaleidoscopeGo = function kaleidoscopeGo(img) {
 
     if (runState) {
       window.requestAnimationFrame(loop);
-    } else {
-      console.log('stopping');
     }
   };
 
-  console.log('starting');
   runState = true;
   window.requestAnimationFrame(loop);
 };
 
 var selectImage = function selectImage(e) {
-  console.log('about to stop');
   runState = false;
   window.requestAnimationFrame(function () {
     var img = new Image();
@@ -270,6 +267,14 @@ var options = document.getElementsByClassName('optionImg');
 for (var i = 0; i < options.length; i++) {
   options[i].onclick = selectImage;
 }
+
+document.getElementById('slowSpeed').onclick = function () {
+  return speed = 0.5;
+};
+
+document.getElementById('fastSpeed').onclick = function () {
+  return speed = 1;
+};
 
 options[0].click();
 },{}],"../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -300,7 +305,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50666" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51920" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

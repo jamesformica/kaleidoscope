@@ -12,6 +12,7 @@
   margin-top: 50px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .optionImg {
@@ -24,6 +25,28 @@
 
 .optionImg:hover {
   transform: scale(1.1);
+}
+
+.speed {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionSpeed {
+  color: white;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 1000px;
+  padding: 5px 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.optionSpeed:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /*# sourceMappingURL=/styles.8986bff4.css.map */
