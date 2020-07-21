@@ -1,4 +1,4 @@
-import guitars from './img/guitars.jpg'
+let runState = false
 
 const POINTS = 10
 const RADIUS = 300
@@ -28,7 +28,7 @@ const clearCanvases = () => {
   clearCanvas(kCanvas, kCtx);
 }
 
-const drawWedge = () => {
+const drawWedge = (x, y, img) => {
   let degree = 345;
   const d1 = degree - 0.5
   const d2 = degree + SLICE + 0.2 // remove white seams
@@ -94,8 +94,7 @@ let pointCounter = 1
 let x = -1
 let y = -1
 
-var img = document.createElement('img');
-img.onload = function () {
+const kaleidoscopeGo = img => {
   const points = selectPoints(img.width, img.height)
 
   x = points[0].x
@@ -105,7 +104,7 @@ img.onload = function () {
 
   const loop = () => {
     clearCanvases()
-    drawWedge()
+    drawWedge(x, y, img)
     drawInverseWedge()
     drawWheel()
 
@@ -125,8 +124,32 @@ img.onload = function () {
       y += nextPoint(y, destinationPoint.y)
     }
 
-    window.requestAnimationFrame(loop)
+    if (runState) {
+      window.requestAnimationFrame(loop)
+    } else {
+      console.log('stopping')
+    }
   }
+  console.log('starting')
+  runState = true;
   window.requestAnimationFrame(loop)
 }
-img.src = guitars;
+
+const selectImage = (e) => {
+  console.log('about to stop')
+  runState = false;
+
+  window.requestAnimationFrame(() => {
+    const img = new Image();
+    img.onload = () => kaleidoscopeGo(img)
+    img.src = e.target.src;
+  })
+}
+
+const options = document.getElementsByClassName('optionImg')
+
+for (let i = 0; i < options.length; i++) {
+  options[i].onclick = selectImage
+}
+
+options[0].click()

@@ -5,13 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaleidoscope</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body style="background: black">
-  <canvas id="image"></canvas>
-  <canvas id="pattern" width="600" height="600"></canvas>
-  <canvas id="invPattern" width="600" height="600"></canvas>
-  <canvas id="kaleidoscope" width="600" height="600"></canvas>
+  <canvas id="pattern" width="600" height="600" class="hidden"></canvas>
+  <canvas id="invPattern" width="600" height="600" class="hidden"></canvas>
+  <canvas id="kaleidoscope" width="600" height="600" class="kaleidoscope"></canvas>
+
+  <div class="options">
+    <img class="optionImg" src="/img/guitars.jpg" alt="Guitars">
+    <img class="optionImg" src="/img/d1.jpg" alt="Misc">
+    <img class="optionImg" src="/img/h3.jpg" alt="Misc">
+    <img class="optionImg" src="/img/w2.jpg" alt="Flowers">
+  </div>
+
   <script src="./index.js"></script>
 </body>
 
