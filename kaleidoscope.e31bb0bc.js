@@ -228,7 +228,6 @@ var kaleidoscopeGo = function kaleidoscopeGo(img) {
     var distanceY = Math.abs(y - destinationPoint.y);
 
     if (distanceX === 0 && distanceY === 0) {
-      console.log('on to the next point');
       pointCounter = (pointCounter + 1) % POINTS;
       destinationPoint = points[pointCounter];
     } else if (distanceX === distanceY) {
@@ -248,6 +247,8 @@ var kaleidoscopeGo = function kaleidoscopeGo(img) {
   runState = true;
   window.requestAnimationFrame(loop);
 };
+/* SELECTING A SUPPLIED IMAGE */
+
 
 var selectImage = function selectImage(e) {
   runState = false;
@@ -267,6 +268,8 @@ var options = document.getElementsByClassName('optionImg');
 for (var i = 0; i < options.length; i++) {
   options[i].onclick = selectImage;
 }
+/* CONTROLLING THE SPEED */
+
 
 document.getElementById('slowSpeed').onclick = function () {
   return speed = 0.5;
@@ -275,6 +278,30 @@ document.getElementById('slowSpeed').onclick = function () {
 document.getElementById('fastSpeed').onclick = function () {
   return speed = 1;
 };
+/* HANDLING UPLOADING A FILE */
+
+
+var handleFiles = function handleFiles() {
+  runState = false;
+  var file = inputElement.files[0];
+  var reader = new FileReader();
+
+  reader.onload = function (e) {
+    var img = new Image();
+
+    img.onload = function () {
+      return kaleidoscopeGo(img);
+    };
+
+    img.src = e.target.result;
+  };
+
+  reader.readAsDataURL(file);
+};
+
+var inputElement = document.getElementById('upload');
+inputElement.addEventListener("change", handleFiles, false);
+/* SELECTING THE FIRST IMAGE BY DEFAULT */
 
 options[0].click();
 },{}],"../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -305,7 +332,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51920" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52393" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
