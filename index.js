@@ -20,27 +20,27 @@ invPatternCanvas.width = RADIUS
 invPatternCanvas.height = SLICE_HEIGHT
 
 const clearCanvas = (canvas, ctx) => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
 const clearCanvases = () => {
-  clearCanvas(patternCanvas, patternCtx);
-  clearCanvas(invPatternCanvas, invPatternCtx);
-  clearCanvas(kCanvas, kCtx);
+  clearCanvas(patternCanvas, patternCtx)
+  clearCanvas(invPatternCanvas, invPatternCtx)
+  clearCanvas(kCanvas, kCtx)
 }
 
 const drawWedge = (x, y, img) => {
-  let degree = 345;
+  let degree = 345
   const d1 = degree - 0.5
   const d2 = degree + SLICE + 0.2 // remove white seams
 
   patternCtx.save()
 
   // draw cheese wedge
-  patternCtx.beginPath();
-  patternCtx.moveTo(0, SLICE_HEIGHT / 2);
-  patternCtx.arc(0, SLICE_HEIGHT / 2, RADIUS, (360 - d2) * Math.PI / 180, (360 - d1) * Math.PI / 180);
-  patternCtx.lineTo(0, SLICE_HEIGHT / 2);
+  patternCtx.beginPath()
+  patternCtx.moveTo(0, SLICE_HEIGHT / 2)
+  patternCtx.arc(0, SLICE_HEIGHT / 2, RADIUS, (360 - d2) * Math.PI / 180, (360 - d1) * Math.PI / 180)
+  patternCtx.lineTo(0, SLICE_HEIGHT / 2)
 
   // crop image section into wedge
   patternCtx.clip();
@@ -51,7 +51,7 @@ const drawWedge = (x, y, img) => {
 const drawInverseWedge = () => {
   invPatternCtx.save()
   invPatternCtx.translate(0, SLICE_HEIGHT)
-  invPatternCtx.scale(1, -1);
+  invPatternCtx.scale(1, -1)
   invPatternCtx.drawImage(patternCanvas, 0, 0);
   invPatternCtx.restore()
 }
@@ -61,8 +61,8 @@ const drawWheel = () => {
   kCtx.translate(RADIUS, RADIUS)
 
   for (let i = 0; i <= 360 / SLICE; i += 1) {
-    kCtx.rotate(SLICE * Math.PI / 180);
-    kCtx.drawImage(i % 2 ? patternCanvas : invPatternCanvas, 0, SLICE_HEIGHT / -2);
+    kCtx.rotate(SLICE * Math.PI / 180)
+    kCtx.drawImage(i % 2 ? patternCanvas : invPatternCanvas, 0, SLICE_HEIGHT / -2)
   }
 
   kCtx.restore()
@@ -129,17 +129,18 @@ const kaleidoscopeGo = img => {
     }
   }
 
-  runState = true;
+  runState = true
   window.requestAnimationFrame(loop)
 }
 
+/* SELECTING A SUPPLIED IMAGE */
 const selectImage = (e) => {
-  runState = false;
+  runState = false
 
   window.requestAnimationFrame(() => {
-    const img = new Image();
+    const img = new Image()
     img.onload = () => kaleidoscopeGo(img)
-    img.src = e.target.src;
+    img.src = e.target.src
   })
 }
 
@@ -149,7 +150,29 @@ for (let i = 0; i < options.length; i++) {
   options[i].onclick = selectImage
 }
 
+/* CONTROLLING THE SPEED */
 document.getElementById('slowSpeed').onclick = () => speed = 0.5
 document.getElementById('fastSpeed').onclick = () => speed = 1
 
+/* HANDLING UPLOADING A FILE */
+const handleFiles = () => {
+  runState = false
+
+  const file = inputElement.files[0]
+  const reader = new FileReader()
+  
+  reader.onload = (e) => {
+    const img = new Image()
+    img.onload = () => kaleidoscopeGo(img)
+    img.src = e.target.result
+  }
+
+  reader.readAsDataURL(file)
+}
+
+const inputElement = document.getElementById('upload')
+inputElement.addEventListener("change", handleFiles, false)
+
+
+/* SELECTING THE FIRST IMAGE BY DEFAULT */
 options[0].click()
