@@ -130,6 +130,12 @@ const drawWheel = () => {
     );
   }
 
+
+  kCtx.arc(0, 0, RADIUS - 2, 0, rad(360));
+  kCtx.lineWidth = 2;
+  kCtx.strokeStyle = "black";
+  kCtx.stroke();
+
   kCtx.restore();
 };
 
@@ -168,10 +174,10 @@ const kaleidoscopeGo = (img) => {
   const query = new URLSearchParams(location.search);
   const points = [getQueryPoint1(query), getQueryPoint2(query)];
 
-  let counter = 0
+  let counter = 0;
   let point = points[counter];
-  let x = point.x
-  let y = point.y
+  let x = point.x;
+  let y = point.y;
 
   const loop = () => {
     clearCanvases(); // wipe clean the canvases
@@ -183,8 +189,8 @@ const kaleidoscopeGo = (img) => {
     const distanceY = point.y - y; // the target point
 
     if (distanceX === 0 && distanceY === 0) {
-      counter = (counter + 1) % points.length
-      point = points[counter]
+      counter = (counter + 1) % points.length;
+      point = points[counter];
     } else {
       const length = Math.sqrt(distanceY * distanceY + distanceX * distanceX);
       x = Math.round(x + distanceX / length); // options: -1, 0, 1 in x direction
