@@ -74,8 +74,8 @@ const drawWedge = (x, y, img) => {
   patternCtx.beginPath();
   patternCtx.moveTo(0, SLICE_HEIGHT / 2);
 
-  const circlStart = rad(SLICE_ANGLE / -2) - 0.01;
-  const circleStop = rad(SLICE_ANGLE  / 2) + 0.01;
+  const circlStart = rad(SLICE_ANGLE / -2) - 0.02;
+  const circleStop = rad(SLICE_ANGLE  / 2) + 0.02;
   patternCtx.arc(0, SLICE_HEIGHT / 2, RADIUS, circlStart, circleStop);
 
   // clip the current shape so the image fills inside it
