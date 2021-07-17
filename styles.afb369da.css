@@ -1,0 +1,56 @@
+body {
+  background: black;
+}
+
+.hidden {
+  display: none;
+}
+
+.kaleidoscope {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.options {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionImg {
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.optionImg:hover {
+  transform: scale(1.1);
+}
+
+.speed {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionSpeed {
+  color: white;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 1000px;
+  padding: 5px 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.optionSpeed:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/*# sourceMappingURL=/kaleidoscope/styles.afb369da.css.map */
