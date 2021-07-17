@@ -194,8 +194,8 @@ var drawWedge = function drawWedge(x, y, img) {
   patternCtx.save();
   patternCtx.beginPath();
   patternCtx.moveTo(0, SLICE_HEIGHT / 2);
-  var circlStart = rad(SLICE_ANGLE / -2);
-  var circleStop = rad(SLICE_ANGLE / 2);
+  var circlStart = rad(SLICE_ANGLE / -2) - 0.01;
+  var circleStop = rad(SLICE_ANGLE / 2) + 0.01;
   patternCtx.arc(0, SLICE_HEIGHT / 2, RADIUS, circlStart, circleStop); // clip the current shape so the image fills inside it
 
   patternCtx.clip(); // fill it with whatever is in the image at that x and y coord
@@ -343,7 +343,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50531" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53558" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
