@@ -12,6 +12,13 @@ body {
   margin-right: auto;
 }
 
+.kaleidoscope.muetry {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .options {
   margin-top: 50px;
   display: flex;
