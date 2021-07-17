@@ -119,6 +119,7 @@ const drawInverseWedge = () => {
  */
 const drawWheel = () => {
   kCtx.save();
+  kCtx.beginPath()
   kCtx.translate(RADIUS, RADIUS); // go to middle
 
   for (let i = 0; i <= 360 / SLICE_ANGLE; i += 1) {
@@ -131,7 +132,7 @@ const drawWheel = () => {
   }
 
 
-  kCtx.arc(0, 0, RADIUS - 2, 0, rad(360));
+  kCtx.arc(0, 0, RADIUS - 2, rad(0), rad(360));
   kCtx.lineWidth = 2;
   kCtx.strokeStyle = "black";
   kCtx.stroke();
