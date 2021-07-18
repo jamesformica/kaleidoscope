@@ -140,9 +140,6 @@ for (let i = 0; i < options.length; i++) {
   options[i].onclick = selectImage;
 }
 
-document.getElementById("slowSpeed").onclick = () => (speed = 0.5);
-document.getElementById("fastSpeed").onclick = () => (speed = 1);
-
 const handleFiles = () => {
   runState = false;
 
