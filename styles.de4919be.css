@@ -1,0 +1,37 @@
+body {
+  background: transparent;
+}
+
+.hidden {
+  display: none;
+}
+
+.kaleidoscope {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.options {
+  margin-top: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionImg {
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.optionImg:hover {
+  transform: scale(1.1);
+}
+
+
+/*# sourceMappingURL=/kaleidoscope/styles.de4919be.css.map */
