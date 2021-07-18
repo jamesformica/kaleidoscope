@@ -29,8 +29,8 @@ const drawWedge = (x, y, img) => {
   patternCtx.beginPath();
   patternCtx.moveTo(0, SLICE_HEIGHT / 2);
 
-  const circlStart = rad(SLICE_ANGLE / -2) - 0.02;
-  const circleStop = rad(SLICE_ANGLE / 2) + 0.02;
+  const circlStart = rad(SLICE_ANGLE / -2) - 0.005;
+  const circleStop = rad(SLICE_ANGLE / 2) + 0.005;
   patternCtx.arc(0, SLICE_HEIGHT / 2, RADIUS, circlStart, circleStop);
 
   patternCtx.clip();
@@ -52,6 +52,7 @@ const drawWedge = (x, y, img) => {
 
 const drawInverseWedge = () => {
   invPatternCtx.save();
+  invPatternCtx.beginPath();
   invPatternCtx.translate(0, SLICE_HEIGHT);
   invPatternCtx.scale(1, -1);
   invPatternCtx.drawImage(patternCanvas, 0, 0);
@@ -61,6 +62,7 @@ const drawInverseWedge = () => {
 
 const drawWheel = () => {
   kCtx.save();
+  kCtx.beginPath();
   kCtx.translate(RADIUS, RADIUS);
 
   for (let i = 0; i <= 360 / SLICE_ANGLE; i += 1) {
