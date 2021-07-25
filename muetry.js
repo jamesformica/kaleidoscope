@@ -133,7 +133,7 @@ const drawWheel = () => {
   }
 
 
-  kCtx.arc(0, 0, RADIUS - 2, rad(0), rad(360));
+  kCtx.arc(0, 0, RADIUS - 1, rad(0), rad(360));
   kCtx.lineWidth = 2;
   kCtx.strokeStyle = "black";
   kCtx.stroke();
