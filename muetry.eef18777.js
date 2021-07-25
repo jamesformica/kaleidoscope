@@ -241,7 +241,7 @@ var drawWheel = function drawWheel() {
     kCtx.drawImage(i % 2 ? patternCanvas : invPatternCanvas, 0, SLICE_HEIGHT / -2);
   }
 
-  kCtx.arc(0, 0, RADIUS - 2, rad(0), rad(360));
+  kCtx.arc(0, 0, RADIUS - 1, rad(0), rad(360));
   kCtx.lineWidth = 2;
   kCtx.strokeStyle = "black";
   kCtx.stroke();
@@ -344,7 +344,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59915" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50760" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
